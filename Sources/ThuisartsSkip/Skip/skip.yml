@@ -10,3 +10,6 @@
 # this is a natively-compiled Skip Fuse module
 skip:
   mode: 'native'
+  bridging:
+    auto: true
+    options: 'kotlincompat'

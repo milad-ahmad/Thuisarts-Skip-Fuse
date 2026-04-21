@@ -8,10 +8,10 @@
 import Foundation
 import Observation
 import SkipFuse
-
+// SKIP @bridgeMembers
 @MainActor 
 @Observable
-public final class TextComponentViewModel {
+public class TextComponentViewModel {
     public private(set) var text: TextComponent
 
     public init(text: TextComponent) {

@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
-
-@MainActor 
+import SkipFuse
+// SKIP @bridgeMembers
+@MainActor
 @Observable
-public final class UnorderdListComponentViewmodel {
+public class UnorderdListComponentViewmodel {
     public private(set) var unorderedList: UnorderedListComponent
 
     public init(unorderedList: UnorderedListComponent) {

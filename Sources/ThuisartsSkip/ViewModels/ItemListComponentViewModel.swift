@@ -8,7 +8,7 @@
 import Foundation
 import Observation
 import SkipFuse
-
+// SKIP @bridgeMembers
 @MainActor 
 @Observable
 public class ItemListComponentViewModel {

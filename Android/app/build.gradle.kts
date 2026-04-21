@@ -88,4 +88,8 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
+
+    dependencies {
+        implementation("io.coil-kt:coil-compose:2.6.0")
+    }
 }

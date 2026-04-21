@@ -1,12 +1,10 @@
 package thuisarts.skip
 
-import skip.lib.*
-import skip.model.*
 import skip.foundation.*
 import skip.ui.*
 
-import android.Manifest
 import android.app.Application
+import android.os.Bundle
 import android.graphics.Color as AndroidColor
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -18,14 +16,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.material3.MaterialTheme
-import androidx.core.app.ActivityCompat
+import androidx.compose.runtime.remember
 
 internal val logger: SkipLogger = SkipLogger(subsystem = "thuisarts.skip", category = "ThuisartsSkip")
 
@@ -53,19 +48,20 @@ open class MainActivity: AppCompatActivity {
     constructor() {
     }
 
-    override fun onCreate(savedInstanceState: android.os.Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         logger.info("starting activity")
         UIApplication.launch(this)
         enableEdgeToEdge()
 
+
         setContent {
-            val saveableStateHolder = rememberSaveableStateHolder()
-            saveableStateHolder.SaveableStateProvider(true) {
-                PresentationRootView(ComposeContext())
-                SideEffect { saveableStateHolder.removeState(true) }
+            MaterialTheme {
+                val viewModel = remember { MainViewModel() }
+                MainViewKotlin(viewModel = viewModel)
             }
         }
+
 
         AppDelegate.shared.onLaunch()
 
@@ -116,15 +112,16 @@ open class MainActivity: AppCompatActivity {
         super.onRestart()
     }
 
-    override fun onSaveInstanceState(outState: android.os.Bundle): Unit = super.onSaveInstanceState(outState)
 
-    override fun onRestoreInstanceState(bundle: android.os.Bundle) {
+    override fun onSaveInstanceState(outState: Bundle): Unit = super.onSaveInstanceState(outState)
+
+    override fun onRestoreInstanceState(bundle: Bundle) {
         // Usually you restore your state in onCreate(). It is possible to restore it in onRestoreInstanceState() as well, but not very common. (onRestoreInstanceState() is called after onStart(), whereas onCreate() is called before onStart().
         logger.info("onRestoreInstanceState")
         super.onRestoreInstanceState(bundle)
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: kotlin.Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         logger.info("onRequestPermissionsResult: ${requestCode}")
     }

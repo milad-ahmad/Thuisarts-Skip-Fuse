@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
-
-@MainActor 
+import SkipFuse
+// SKIP @bridgeMembers
+@MainActor
 @Observable
-public final class SectionComponentViewmodel {
+public class SectionComponentViewmodel {
     public private(set) var section: SectionComponent
 
     public init(section: SectionComponent) {

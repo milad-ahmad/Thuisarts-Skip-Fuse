@@ -42,10 +42,7 @@ public struct PageView: View {
         }
     }
 }
-//
-//#Preview {
-//    TabViews()
-//}
+
 
 
 struct SearchView: View {

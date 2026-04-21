@@ -7,10 +7,12 @@
 
 import Foundation
 import SwiftUI
-
-@MainActor 
+import SkipFuse
+// SKIP @bridgeMembers
+@MainActor
 @Observable
-public final class PageViewModel {
+
+public class PageViewModel {
 
     public private(set) var state: AppConstants.PageState = .loading
 
@@ -18,7 +20,7 @@ public final class PageViewModel {
 
     public init() {}
 
-    func getData(for path: UrlPath) async {
+    public func getData(for path: UrlPath) async {
 
         let finalUrlString = AppConstants.EndPoints.test + path.rawValue
 
@@ -56,8 +58,8 @@ public final class PageViewModel {
     }
 
 }
-
-public enum UrlPath: Equatable {
+// SKIP @bridgeMembers
+public enum UrlPath: Equatable, Sendable {
 
     case news
     case page
@@ -78,7 +80,8 @@ public enum UrlPath: Equatable {
     }
 }
 
-enum ApiErrors: Error {
+// SKIP @nobridge
+public enum ApiErrors: Error, Sendable {
     case invalidURL
     case invalidJson
     case decodeError(DecodingError)

@@ -5,11 +5,14 @@
 //  Created by Milad Ahmad on 23/02/2026.
 //
 import Foundation
+import SkipFuse
 
+// SKIP @nobridge
 public protocol Component: Codable, Equatable {
     var type: String { get }
 }
 
+// SKIP @bridgeMembers
 public struct MetaData:  Component, Encodable, Sendable {
     public var type: String
     public let uuid: String
@@ -17,12 +20,14 @@ public struct MetaData:  Component, Encodable, Sendable {
     public let title: String
 }
 
+// SKIP @bridgeMembers
 public struct Page:  Component, Sendable {
     public var type: String
     public let content: [PageContentItem]
     public let metadata: MetaData
 }
 
+// SKIP @bridgeMembers
 public struct Content:  Component,  Hashable {
     public var type: String
     public var content: String?
@@ -30,10 +35,12 @@ public struct Content:  Component,  Hashable {
     public let style: String
 }
 
+// SKIP @bridgeMembers
 public struct UnsupportedComponent:  Component,  Hashable, Sendable {
     public var type: String
 }
 
+// SKIP @bridgeMembers
 public enum PageContentItem: Sendable, Codable,  Hashable, Equatable {
     case image(ImageComponent)
     case itemList(ItemListComponent)
@@ -44,8 +51,9 @@ public enum PageContentItem: Sendable, Codable,  Hashable, Equatable {
     case accordion(AccordionComponent)
     case section(SectionComponent)
     case unorderedList(UnorderedListComponent)
-
-    private enum DiscriminatorKeys: String, CodingKey {
+    
+    // SKIP @bridgeMembers
+    public enum DiscriminatorKeys: String, CodingKey {
         case type
     }
 
@@ -70,12 +78,14 @@ public enum PageContentItem: Sendable, Codable,  Hashable, Equatable {
     }
 }
 
+// SKIP @bridgeMembers
 public struct TextComponent:  Component,  Hashable, Sendable {
     public var type: String
     public var content: String
     public let style: String
 }
 
+// SKIP @bridgeMembers
 public struct ItemComponent:  Component,  Hashable, Sendable {
     public var type: String
     public let title: String
@@ -84,6 +94,7 @@ public struct ItemComponent:  Component,  Hashable, Sendable {
     public let style: ItemStyle
 }
 
+// SKIP @bridgeMembers
 public enum ItemStyle: Codable, Equatable,  Hashable, Sendable {
     case largeImageTopTitleBottom
     case imageTopTitleBottom
@@ -149,12 +160,14 @@ extension ItemStyle: RawRepresentable {
     }
 }
 
+// SKIP @bridgeMembers
 public struct ImageComponent:  Component,  Hashable, Sendable {
     public var type: String
     public let url: String?
     public let style: ImageComponentStyle
 }
 
+// SKIP @bridgeMembers
 public enum ImageComponentStyle: Codable, Equatable,  Hashable, Sendable {
     case header
     case `default`
@@ -181,6 +194,7 @@ extension ImageComponentStyle: RawRepresentable {
     }
 }
 
+// SKIP @bridgeMembers
 public struct ItemListComponent:  Component,  Hashable, Sendable {
     public var type: String
     public let style: String
@@ -188,22 +202,26 @@ public struct ItemListComponent:  Component,  Hashable, Sendable {
     public let more: More
 }
 
+// SKIP @bridgeMembers
 public struct More: Codable, Equatable,  Hashable, Sendable {
     public let fragment: String
     public let cursor: String
 }
 
+// SKIP @bridgeMembers
 public enum Errors: Error {
     case invalidData
     case invalidUrl
     case invalidResponse
 }
 
+// SKIP @bridgeMembers
 public struct AccordionComponent:  Component,  Hashable, Sendable {
     public var type: String
     public let content: [SectionComponent]
 }
 
+// SKIP @bridgeMembers
 public struct SectionComponent:  Component,  Hashable, Sendable {
     public var type: String
     public let title: String?
@@ -213,11 +231,13 @@ public struct SectionComponent:  Component,  Hashable, Sendable {
     public let anchor: String?
 }
 
+// SKIP @bridgeMembers
 public struct UnorderedListComponent:  Component,  Hashable, Sendable {
     public var type: String
     public let items: [ListItemComponent]
 }
 
+// SKIP @bridgeMembers
 public struct ListItemComponent: Codable,  Hashable, Equatable, Sendable {
     public let content: [PageContentItem]
 }

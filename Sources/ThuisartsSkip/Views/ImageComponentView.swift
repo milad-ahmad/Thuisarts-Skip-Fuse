@@ -53,15 +53,12 @@ public struct DefaultImageComponent: View {
                 .clipShape(RoundedRectangle(cornerRadius: 24))
                 .padding(.leading, 8)
             } placeholder: {
-              Image(systemName: "person")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 128, height: 128)
-                .foregroundColor(.purple)
-                .opacity(0.5)
+                Image(systemName: "photo.badge.exclamationmark")
+                    .font(.system(.largeTitle, weight: .light))
+                    .foregroundStyle(.gray)
             }
         } else {
-            Image(systemName: "person")
+            Image(systemName: "photo.badge.exclamationmark")
                 .font(.system(.largeTitle, weight: .light))
                 .foregroundStyle(.gray)
         }
@@ -91,17 +88,12 @@ public struct HeaderImageComponent: View {
                 .clipShape(RoundedRectangle(cornerRadius: 24))
                 .padding(.leading, 8)
             } placeholder: {
-              Image(systemName: "person")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 128, height: 128)
-                .foregroundColor(.purple)
-                .opacity(0.5)
+
             }
         } else {
-            Image(systemName: "person")
+            Image(systemName: "photo.badge.exclamationmark")
                 .font(.system(.title, weight: .light))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.gray)
         }
     }
 }

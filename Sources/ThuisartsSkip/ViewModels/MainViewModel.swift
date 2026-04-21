@@ -6,16 +6,18 @@
 //
 import Foundation
 import SwiftUI
+import SkipFuse
 
-@MainActor 
+// SKIP @bridgeMembers
+@MainActor
 @Observable
-final class MainViewModel {
+public class MainViewModel {
 
-    public private(set) var state: AppConstants.PageState = .loading
+    public var state: AppConstants.PageState = .loading
 
     public init() {}
 
-    func getData(for path: UrlPath) async {
+    public func getData(for path: UrlPath) async {
 
         let finalUrlString = AppConstants.EndPoints.test + path.rawValue
 

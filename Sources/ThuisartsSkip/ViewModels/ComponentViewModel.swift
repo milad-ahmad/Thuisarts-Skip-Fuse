@@ -8,11 +8,13 @@ import Foundation
 import Observation
 import SkipFuse
 
-@MainActor 
+// SKIP @bridgeMembers
+@MainActor
+@Observable
 /// This view model takes a `PageContentItem` and makes it usable for views.
 /// Observable ViewModel that exposes components from `PageContentItem`.
-@Observable
-public final class ComponentViewModel {
+
+public class ComponentViewModel{
     public private(set) var content: PageContentItem
     public private(set) var text: TextComponent?
     public private(set) var image: ImageComponent?

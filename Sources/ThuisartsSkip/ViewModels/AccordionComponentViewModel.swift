@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
-
-@MainActor 
+import SkipFuse
+// SKIP @bridgeMembers
+@MainActor
 @Observable
-public final class AccordionComponentViewModel {
-    public private(set) var accordion: AccordionComponent
+public class AccordionComponentViewModel {
+    public var accordion: AccordionComponent
 
     public init(accordion: AccordionComponent) {
         self.accordion = accordion

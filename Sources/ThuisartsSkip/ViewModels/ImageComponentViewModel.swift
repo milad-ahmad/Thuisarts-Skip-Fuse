@@ -7,7 +7,7 @@
 import Foundation
 import Observation
 import SkipFuse
-
+// SKIP @bridgeMembers
 @Observable
 public class ImageComponentViewModel {
     public private(set) var image: ImageComponent
