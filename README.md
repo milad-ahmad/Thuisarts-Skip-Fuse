@@ -30,9 +30,10 @@ Instructions to build and run the app locally.
 4.  Press `Cmd + R` (Run) to build and start the application.
 
 **For Android:**
-1.  Open the `Android/` folder of the project in Android Studio.
-2.  Allow Gradle to sync (this processes the Skip-generated Kotlin code).
-3.  Select an Android Emulator or physical device and click 'Run' (`Shift + F10`).
+1.  Make sure that you have built the source code in xcode at least once before you start.
+2.  Open the `Android/` folder of the project in Android Studio.
+3.  Allow Gradle to sync (this processes the Skip-generated Kotlin code).
+4.  Select an Android Emulator or physical device and click 'Run' (`Shift + F10`).
 
 
 ## 4. Known Issues & Open Questions
