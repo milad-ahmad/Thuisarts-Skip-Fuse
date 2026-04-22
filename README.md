@@ -42,4 +42,4 @@ Instructions to build and run the app locally.
 * [As of now there are not any known issues regarding to the translation of the business logic.]
 
 **Open Questions for Reviewers:**
-* []
+* https://icthva-my.sharepoint.com/:w:/g/personal/milad_ahmad_hva_nl/IQDIcWrRQz5mQaaXud5vzZerAZPkIX9cEonXKThuU7LzUgs?e=uENibx
