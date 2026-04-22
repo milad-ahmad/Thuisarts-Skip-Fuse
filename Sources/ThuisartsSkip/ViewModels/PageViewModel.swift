@@ -17,8 +17,14 @@ public class PageViewModel {
     public private(set) var state: AppConstants.PageState = .loading
 
     public private(set) var page: Page?
-
+    private let logger = Logger(subsystem: "thuisarts.skip", category: "PageViewModel")
     public init() {}
+
+    public func slowTask() async {
+        logger.info("SWIFT: Starting slow task...")
+        try? await Task.sleep(nanoseconds: 5 * 1_000_000_000) // 5 seconds
+        logger.info("SWIFT: Task finished! (This should not happen if cancelled)")
+    }
 
     public func getData(for path: UrlPath) async {
 

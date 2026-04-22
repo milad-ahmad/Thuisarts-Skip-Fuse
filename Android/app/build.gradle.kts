@@ -90,6 +90,12 @@ android {
     }
 
     dependencies {
-        implementation("io.coil-kt:coil-compose:2.6.0")
+        implementation("io.coil-kt:coil-compose:2.7.0")
+        val koin_version = "4.2.0"
+        implementation(platform("io.insert-koin:koin-bom:$koin_version"))
+        // Add dependencies without versions
+        implementation("io.insert-koin:koin-android")
+        implementation("io.insert-koin:koin-compose")  // Works for Android & Multiplatform
+
     }
 }

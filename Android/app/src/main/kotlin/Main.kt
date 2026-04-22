@@ -5,6 +5,7 @@ import skip.ui.*
 
 import android.app.Application
 import android.os.Bundle
+import android.os.StrictMode
 import android.graphics.Color as AndroidColor
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -21,6 +22,9 @@ import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.remember
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.GlobalContext.startKoin
 
 internal val logger: SkipLogger = SkipLogger(subsystem = "thuisarts.skip", category = "ThuisartsSkip")
 
@@ -37,6 +41,11 @@ open class AndroidAppMain: Application {
         logger.info("starting app")
         ProcessInfo.launch(applicationContext)
         AppDelegate.shared.onInit()
+        startKoin {
+            androidLogger()
+            androidContext(this@AndroidAppMain)
+            modules(appModule)
+        }
     }
 
     companion object {
@@ -51,6 +60,7 @@ open class MainActivity: AppCompatActivity {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         logger.info("starting activity")
+        StrictMode.enableDefaults()
         UIApplication.launch(this)
         enableEdgeToEdge()
 
