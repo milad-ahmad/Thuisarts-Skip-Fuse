@@ -8,6 +8,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -19,9 +20,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.LifecycleStartEffect
+import kotlinx.coroutines.launch
 
 /**
  * A scrollable view that renders dynamic page content and provides a top navigation bar for backward navigation.
@@ -41,6 +45,9 @@ fun PageViewKotlin(
     BackHandler(enabled = canGoBack) {
         navStack = navStack.dropLast(1)
     }
+    var showEffect by remember { mutableStateOf(false) }
+
+
 
     LaunchedEffect(currentUrlPath) {
         if (currentUrlPath != null) {
@@ -48,6 +55,16 @@ fun PageViewKotlin(
         }
     }
 
+
+    LaunchedEffect(Unit) {
+        println("KOTLIN: LaunchedEffect started")
+        try {
+            viewModel.slowTask()
+            println("KOTLIN: LaunchedEffect reached end")
+        } finally {
+            println("KOTLIN: LaunchedEffect disposed")
+        }
+    }
     Scaffold(
         topBar = {
             if (canGoBack) {
@@ -71,6 +88,9 @@ fun PageViewKotlin(
                 .verticalScroll(scrollState),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
+            Button(onClick = { showEffect = !showEffect }) {
+                Text(if (showEffect) "Cancel Effect" else "Start 5s Task")
+            }
             viewModel.page?.content?.forEach { content ->
                 ComponentViewKotlin(
                     viewModel = ComponentViewModel(content),
